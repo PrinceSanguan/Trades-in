@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applied Martial Arts · Campaign Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --surface: #0d1318;
+    --card: #111820;
+    --border: rgba(255,255,255,0.06);
+    --accent: #e63946;
+    --accent2: #f4a261;
+    --teal: #2ec4b6;
+    --blue: #3a86ff;
+    --text: #eef2f7;
+    --muted: #5a6a7a;
+    --green: #06d6a0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 40px,
+      rgba(255,255,255,0.008) 40px,
+      rgba(255,255,255,0.008) 41px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .orb { position: fixed; border-radius: 50%; filter: blur(140px); pointer-events: none; z-index: 0; }
+  .orb1 { width: 500px; height: 500px; background: rgba(230,57,70,0.07); top: -100px; left: -100px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(58,134,255,0.05); bottom: 0; right: -50px; }
+
+  .wrapper { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 0 36px; }
+
+  .hero { padding: 72px 0 56px; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px; border-bottom: 1px solid var(--border); margin-bottom: 56px; }
+
+  .hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+
+  .badge { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; }
+  .badge-red  { color: var(--accent); border: 1px solid rgba(230,57,70,0.35); background: rgba(230,57,70,0.07); }
+  .badge-teal { color: var(--teal);   border: 1px solid rgba(46,196,182,0.35); background: rgba(46,196,182,0.07); }
+  .badge-blue { color: var(--blue);   border: 1px solid rgba(58,134,255,0.35); background: rgba(58,134,255,0.07); }
+
+  .hero h1 { font-family: 'Oswald', sans-serif; font-size: clamp(48px, 7vw, 88px); font-weight: 700; line-height: 0.93; letter-spacing: 0.01em; text-transform: uppercase; }
+  .hero h1 .line2 { color: var(--accent); display: block; }
+
+  .hero-meta { text-align: right; }
+  .period-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .period-range { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 500; color: var(--text); letter-spacing: 0.03em; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 60px; }
+
+  .kpi { background: var(--card); padding: 26px 20px; position: relative; }
+  .kpi::after { content: ''; position: absolute; bottom: 0; left: 20px; right: 20px; height: 1px; background: var(--border); }
+
+  .kpi-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .kpi-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); }
+  .kpi-src { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--muted); opacity: 0.6; }
+  .kpi-value { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 600; letter-spacing: 0.02em; line-height: 1; }
+  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 6px; font-weight: 300; }
+  .kpi-bar { height: 3px; border-radius: 1px; margin-top: 14px; }
+
+  .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .section-head h2 { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); white-space: nowrap; }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  .campaign-table { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 60px; }
+
+  .ct-header { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; padding: 12px 24px; background: rgba(255,255,255,0.025); border-bottom: 1px solid var(--border); }
+  .ct-header span { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  .ct-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; padding: 18px 24px; border-bottom: 1px solid var(--border); align-items: center; transition: background 0.15s; }
+  .ct-row:last-child { border-bottom: none; }
+  .ct-row:hover { background: rgba(255,255,255,0.02); }
+
+  .ct-name { font-size: 13px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 10px; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); flex-shrink: 0; }
+
+  .ct-cell { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--text); }
+  .ct-cell.muted { color: var(--muted); }
+
+  .cost-chip { display: inline-flex; align-items: center; gap: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; padding: 3px 10px; border-radius: 20px; }
+  .cost-green { background: rgba(6,214,160,0.1); color: var(--green); border: 1px solid rgba(6,214,160,0.2); }
+  .cost-amber { background: rgba(244,162,97,0.1); color: var(--accent2); border: 1px solid rgba(244,162,97,0.2); }
+
+  .pipeline-wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 60px; }
+
+  .pipe-col { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+
+  .pipe-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; }
+  .pipe-title { font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); }
+  .pipe-count { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); }
+
+  .pipe-cards { padding: 10px; display: flex; flex-direction: column; gap: 7px; max-height: 420px; overflow: hidden; }
+
+  .lead-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; transition: border-color 0.2s; }
+  .lead-card:hover { border-color: rgba(255,255,255,0.12); }
+
+  .lead-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; }
+  .lead-name { font-size: 12px; font-weight: 500; color: var(--text); }
+  .lead-src { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--muted); }
+  .src-fb { color: #4267B2; }
+  .src-nogi { color: var(--teal); }
+
+  .av { width: 20px; height: 20px; border-radius: 50%; font-size: 8px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; }
+  .av-mh { background: linear-gradient(135deg, #3a86ff, #6d5ff5); }
+  .av-none { background: rgba(255,255,255,0.08); color: var(--muted); }
+
+  .more-card { border: 1px dashed rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 12px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 0 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-left { display: flex; align-items: center; gap: 14px; }
+  .ama-logo { font-family: 'Oswald', sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); }
+  .ama-full { font-size: 12px; color: var(--muted); font-weight: 300; }
+  .footer-right { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); text-align: right; line-height: 1.8; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero, .kpi-grid, .campaign-table, .pipeline-wrap { animation: fadeUp 0.55s ease both; }
+  .kpi-grid { animation-delay: 0.08s; }
+  .campaign-table { animation-delay: 0.16s; }
+  .pipeline-wrap { animation-delay: 0.24s; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-meta { text-align: left; }
+    .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    .ct-header, .ct-row { grid-template-columns: 2fr 1fr 1fr; }
+    .ct-header span:nth-child(n+4), .ct-row *:nth-child(n+4) { display: none; }
+    .pipeline-wrap { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="wrapper">
+
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="badge badge-red">● Facebook Ads</span>
+        <span class="badge badge-teal">GHL CRM</span>
+      </div>
+      <h1>Applied<span class="line2">Martial Arts</span></h1>
+    </div>
+    <div class="hero-meta">
+      <div class="period-label">Reporting Period</div>
+      <div class="period-range">Feb 25 – Mar 26, 2026</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-top"><div class="kpi-label">Total Leads</div><div class="kpi-src">FB Ads</div></div>
+      <div class="kpi-value" style="color: var(--accent)">60</div>
+      <div class="kpi-sub">Lead form results</div>
+      <div class="kpi-bar" style="background: rgba(230,57,70,0.5); width:100%;"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><div class="kpi-label">Kids Campaign</div><div class="kpi-src">FB Ads</div></div>
+      <div class="kpi-value" style="color: var(--accent2)">9</div>
+      <div class="kpi-sub">Leads @ £8.70 CPL</div>
+      <div class="kpi-bar" style="background: rgba(244,162,97,0.5); width:30%;"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><div class="kpi-label">Main Campaign</div><div class="kpi-src">FB Ads</div></div>
+      <div class="kpi-value" style="color: var(--green)">51</div>
+      <div class="kpi-sub">Leads @ £7.37 CPL</div>
+      <div class="kpi-bar" style="background: rgba(6,214,160,0.5); width:85%;"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><div class="kpi-label">Spend</div><div class="kpi-src">FB Ads</div></div>
+      <div class="kpi-value" style="color: var(--blue)">£454</div>
+      <div class="kpi-sub">Total amount spent</div>
+      <div class="kpi-bar" style="background: rgba(58,134,255,0.5); width:60%;"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><div class="kpi-label">Trial Booked</div><div class="kpi-src">GHL</div></div>
+      <div class="kpi-value" style="color: var(--teal)">26</div>
+      <div class="kpi-sub">Pipeline stage</div>
+      <div class="kpi-bar" style="background: rgba(46,196,182,0.5); width:50%;"></div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2>Facebook Campaigns</h2>
+    <div class="section-line"></div>
+    <span class="badge badge-teal">2 Active</span>
+  </div>
+
+  <div class="campaign-table">
+    <div class="ct-header">
+      <span>Campaign</span><span>Results</span><span>Cost / Lead</span><span>Impressions</span><span>Spent</span><span>Budget</span>
+    </div>
+    <div class="ct-row">
+      <div class="ct-name"><div class="live-dot"></div>CHOROS || KIDS OFFER || LEADS</div>
+      <div class="ct-cell">9 Leads</div>
+      <div class="ct-cell"><span class="cost-amber">£8.70</span></div>
+      <div class="ct-cell">12,763</div>
+      <div class="ct-cell">£78.34</div>
+      <div class="ct-cell muted">Ad set budget</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-name"><div class="live-dot"></div>CHOROS | Leads</div>
+      <div class="ct-cell">51 Leads</div>
+      <div class="ct-cell"><span class="cost-green">£7.37</span></div>
+      <div class="ct-cell">70,219</div>
+      <div class="ct-cell">£375.94</div>
+      <div class="ct-cell muted">£12.50 / day</div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2>GHL Opportunity Pipeline</h2>
+    <div class="section-line"></div>
+    <span class="badge badge-red">55 Total Opps</span>
+  </div>
+
+  <div class="pipeline-wrap">
+
+    <div class="pipe-col" style="border-top: 2px solid var(--accent)">
+      <div class="pipe-head"><div class="pipe-title">Trial Class Booked</div><div class="pipe-count">26 Opportunities · £0.00</div></div>
+      <div class="pipe-cards">
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Lizzie</div><div class="av av-mh">MH</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Dougie</div><div class="av av-mh">MH</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Steven</div><div class="av av-mh">MH</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Mark</div><div class="av av-mh">MH</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Jacob</div><div class="av av-mh">MH</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="more-card">+21 more leads</div>
+      </div>
+    </div>
+
+    <div class="pipe-col" style="border-top: 2px solid var(--accent2)">
+      <div class="pipe-head"><div class="pipe-title">Trial Class Attended</div><div class="pipe-count">15 Opportunities · £0.00</div></div>
+      <div class="pipe-cards">
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Joe Dawson</div><div class="av av-none">—</div></div><div class="lead-src src-nogi">● Adult NoGi Grappling</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Bradley</div><div class="av av-none">—</div></div><div class="lead-src" style="color:var(--muted)">—</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">harleyfoulkes</div><div class="av av-none">—</div></div><div class="lead-src" style="color:var(--muted)">—</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Sergiu Orbu</div><div class="av av-none">—</div></div><div class="lead-src src-nogi">● Adult NoGi Grappling</div></div>
+        <div class="more-card">+11 more leads</div>
+      </div>
+    </div>
+
+    <div class="pipe-col" style="border-top: 2px solid var(--blue)">
+      <div class="pipe-head"><div class="pipe-title">Pay as you Go</div><div class="pipe-count">3 Opportunities · £0.00</div></div>
+      <div class="pipe-cards">
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Jack</div><div class="av av-none">—</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Rhi</div><div class="av av-none">—</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Erin</div><div class="av av-none">—</div></div><div class="lead-src src-fb">● Facebook</div></div>
+      </div>
+    </div>
+
+    <div class="pipe-col" style="border-top: 2px solid var(--green)">
+      <div class="pipe-head"><div class="pipe-title">Signed Up</div><div class="pipe-count">11 Opportunities · £0.00</div></div>
+      <div class="pipe-cards">
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Ben Allen</div><div class="av av-none">—</div></div><div class="lead-src src-nogi">● Adult NoGi Grappling</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Lewis</div><div class="av av-mh">MH</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Charlie</div><div class="av av-none">—</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Luca</div><div class="av av-none">—</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="lead-card"><div class="lead-top"><div class="lead-name">Radu</div><div class="av av-none">—</div></div><div class="lead-src src-fb">● Facebook</div></div>
+        <div class="more-card">+6 more signed up</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      <div class="ama-logo">AMA</div>
+      <div class="ama-full">Applied Martial Arts<br>Campaign Performance Report</div>
+    </div>
+    <div class="footer-right">Facebook Ads · GoHighLevel CRM<br>Feb 25 – Mar 26, 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>

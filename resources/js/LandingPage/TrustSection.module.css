@@ -1,0 +1,136 @@
+.section {
+    background: transparent;
+    padding: 3rem 0;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0.25rem 0 0.5rem 0;
+}
+
+.stars {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #4b5563;
+    margin: 0 0 1rem 0;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #4b5563;
+    max-width: 56rem;
+    margin: 0 auto;
+}
+
+.logoGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    align-items: center;
+}
+
+.logoItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(17, 24, 39, 0.1);
+    transition: all 0.3s ease;
+    min-height: 120px;
+}
+
+.logoItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    max-width: 100%;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+    filter: brightness(0) saturate(100%);
+}
+
+.logoItem:hover .logo {
+    opacity: 1;
+}
+
+.logoLarge {
+    max-height: 104px;
+}
+
+.logoCropLeft {
+    clip-path: inset(0 0 0 30%);
+    transform: translateX(-15%);
+}
+
+@media (max-width: 1024px) {
+    .logoGrid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .logoGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+    
+    .logoItem {
+        min-height: 100px;
+    }
+    
+    .logo {
+        max-height: 60px;
+    }
+
+    .logoLarge {
+        max-height: 78px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logoGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .logoItem {
+        min-height: 80px;
+        padding: 0.75rem;
+    }
+    
+    .logo {
+        max-height: 50px;
+    }
+
+    .logoLarge {
+        max-height: 64px;
+    }
+}

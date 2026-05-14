@@ -1,0 +1,193 @@
+.section {
+    background: transparent;
+    padding: 4rem 0;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.85rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    color: #c45a00;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.title {
+    margin-top: 1rem;
+    font-size: 1.65rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #111827;
+}
+
+.subtitle {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    font-weight: 500;
+    color: #4b5563;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .card {
+        grid-column: span 2;
+    }
+    
+    .card:nth-child(4) {
+        grid-column: 2 / 4;
+    }
+    
+    .card:nth-child(5) {
+        grid-column: 4 / 6;
+    }
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 5px 10px -8px rgb(15 23 42 / 0.08);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 6px 12px -8px rgb(15 23 42 / 0.09);
+    transform: translateY(-2px);
+}
+
+.iconWrapper {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #111827;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.iconWrapper svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+.cardTitle {
+    font-size: 1.25rem;
+    line-height: 2.2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.cardDescription {
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.closingLine {
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #4b5563;
+    max-width: 56rem;
+    margin: 2.5rem auto 0 auto;
+    font-weight: 500;
+}
+
+.ctaButtons {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.ctaPhone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    background: #111827;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaPhone:hover { background: #374151; }
+
+.ctaWhatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    background: #111827;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaWhatsapp:hover { background: #374151; }
+
+.ctaQuote {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    border: 2px solid #111827;
+    color: #374151;
+    background: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaQuote:hover { background: #ffffff; }
+
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}

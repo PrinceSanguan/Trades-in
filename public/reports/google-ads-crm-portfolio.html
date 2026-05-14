@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPC & CRM Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: rgba(255,255,255,0.07);
+    --accent: #4ade80;
+    --accent2: #60a5fa;
+    --accent3: #f59e0b;
+    --text: #f0f0f5;
+    --muted: #6b7280;
+    --red: #ef4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  .glow-orb { position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+  .orb1 { background: rgba(74,222,128,0.06); top: -200px; right: -100px; }
+  .orb2 { background: rgba(96,165,250,0.05); bottom: -200px; left: -100px; }
+
+  .wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  header { padding: 64px 0 48px; border-bottom: 1px solid var(--border); margin-bottom: 64px; }
+
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(74,222,128,0.3); padding: 4px 12px; border-radius: 2px; margin-bottom: 20px; }
+
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 96px); line-height: 0.95; letter-spacing: 0.01em; color: var(--text); margin-bottom: 20px; }
+  h1 span { color: var(--accent); }
+
+  .subtitle { font-size: 16px; color: var(--muted); max-width: 480px; line-height: 1.7; font-weight: 300; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 64px; }
+
+  .stat-item { background: var(--card); padding: 28px 24px; position: relative; overflow: hidden; }
+  .stat-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .stat-item.blue::before { background: var(--accent2); }
+  .stat-item.red::before { background: var(--red); }
+  .stat-item.amber::before { background: var(--accent3); }
+  .stat-item.green::before { background: var(--accent); }
+
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .stat-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .blue .stat-dot { background: var(--accent2); }
+  .red .stat-dot { background: var(--red); }
+  .amber .stat-dot { background: var(--accent3); }
+  .green .stat-dot { background: var(--accent); }
+
+  .stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 0.02em; line-height: 1; }
+  .blue .stat-value { color: var(--accent2); }
+  .red .stat-value { color: var(--red); }
+  .amber .stat-value { color: var(--accent3); }
+  .green .stat-value { color: var(--accent); }
+
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 6px; font-weight: 300; }
+
+  .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+  .section-label h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 64px; }
+
+  .chart-header { padding: 24px 28px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .chart-title { font-size: 14px; font-weight: 500; color: var(--text); }
+  .chart-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  .legend { display: flex; gap: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+  .legend-line { width: 20px; height: 2px; border-radius: 1px; }
+
+  .chart-body { padding: 28px; }
+  .chart-svg { width: 100%; height: 220px; }
+
+  .pipeline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 64px; }
+
+  .pipeline-col { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+
+  .pipeline-col-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .pipeline-col-title { font-size: 12px; font-weight: 500; color: var(--text); }
+  .pipeline-col-count { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 20px; }
+
+  .pipeline-cards { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+
+  .opp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 12px 14px; transition: border-color 0.2s; cursor: default; }
+  .opp-card:hover { border-color: rgba(255,255,255,0.15); }
+
+  .opp-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+  .opp-value { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
+
+  .opp-avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--accent2), #818cf8); display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; color: white; float: right; margin-top: -2px; }
+
+  .opp-row { display: flex; justify-content: space-between; align-items: flex-end; }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.05em; color: var(--muted); }
+  .footer-note { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  header, .stats-row, .chart-card, .pipeline-grid { animation: fadeUp 0.6s ease both; }
+  .stats-row { animation-delay: 0.1s; }
+  .chart-card { animation-delay: 0.2s; }
+  .pipeline-grid { animation-delay: 0.3s; }
+
+  @media (max-width: 700px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .pipeline-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-orb orb1"></div>
+<div class="glow-orb orb2"></div>
+
+<div class="wrapper">
+
+  <header>
+    <div class="tag">● Live Campaign Data</div>
+    <h1>Google Ads<br><span>&</span> CRM Pipeline</h1>
+    <p class="subtitle">Performance snapshot from Jan 29 – Mar 27, 2026 · Paid Search + GoHighLevel opportunity tracking</p>
+  </header>
+
+  <div class="stats-row">
+    <div class="stat-item blue">
+      <div class="stat-label"><span class="stat-dot"></span>Clicks</div>
+      <div class="stat-value">1.55K</div>
+      <div class="stat-sub">Total clicks · 2 months</div>
+    </div>
+    <div class="stat-item red">
+      <div class="stat-label"><span class="stat-dot"></span>Impressions</div>
+      <div class="stat-value">38.5K</div>
+      <div class="stat-sub">Ad impressions</div>
+    </div>
+    <div class="stat-item amber">
+      <div class="stat-label"><span class="stat-dot"></span>Cost / Conv.</div>
+      <div class="stat-value">£123</div>
+      <div class="stat-sub">Per conversion</div>
+    </div>
+    <div class="stat-item green">
+      <div class="stat-label"><span class="stat-dot"></span>Conversions</div>
+      <div class="stat-value">67</div>
+      <div class="stat-sub">Lead form submits</div>
+    </div>
+  </div>
+
+  <div class="section-label"><h2>Campaign Performance</h2></div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Clicks · Impressions · Cost/Conv. · Conversions</div>
+        <div class="chart-meta">Jan 29, 2026 → Mar 27, 2026</div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-line" style="background:#60a5fa"></div>Clicks</div>
+        <div class="legend-item"><div class="legend-line" style="background:#ef4444"></div>Impressions</div>
+        <div class="legend-item"><div class="legend-line" style="background:#f59e0b"></div>Cost/Conv.</div>
+        <div class="legend-item"><div class="legend-line" style="background:#4ade80; border-top: 2px dashed #4ade80; background:none;"></div>Conversions</div>
+      </div>
+    </div>
+    <div class="chart-body">
+      <svg class="chart-svg" viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="50" x2="1000" y2="50" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="100" x2="1000" y2="100" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="150" x2="1000" y2="150" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <polyline fill="none" stroke="#60a5fa" stroke-width="2" stroke-linejoin="round"
+          points="0,160 33,130 66,80 100,110 133,145 166,115 200,90 233,120 266,55 299,70 332,85 365,100 398,60 431,40 464,30 497,100 530,130 563,120 596,135 629,140 662,145 695,130 728,145 761,138 794,130 827,135 860,140 893,145 926,148 960,150 1000,155"/>
+        <polygon fill="url(#blueGrad)"
+          points="0,160 33,130 66,80 100,110 133,145 166,115 200,90 233,120 266,55 299,70 332,85 365,100 398,60 431,40 464,30 497,100 530,130 563,120 596,135 629,140 662,145 695,130 728,145 761,138 794,130 827,135 860,140 893,145 926,148 960,150 1000,155 1000,200 0,200"/>
+        <polyline fill="none" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"
+          points="0,155 33,120 66,60 100,100 133,140 166,100 200,85 233,115 266,50 299,75 332,90 365,105 398,70 431,55 464,40 497,95 530,120 563,115 596,128 629,135 662,140 695,125 728,140 761,133 794,125 827,130 860,138 893,140 926,143 960,145 1000,150"/>
+        <polyline fill="none" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"
+          points="0,145 33,155 66,140 100,160 133,110 166,155 200,145 233,160 266,120 299,135 332,80 365,130 398,90 431,150 464,170 497,50 530,160 563,100 596,120 629,115 662,130 695,135 728,120 761,140 794,125 827,130 860,135 893,128 926,140 960,138 1000,142"/>
+        <polyline fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="5,4" stroke-linejoin="round"
+          points="0,170 66,165 133,162 200,158 266,152 332,155 398,148 464,145 530,155 596,158 662,160 728,155 794,152 860,155 926,158 1000,160"/>
+        <text x="0" y="195" fill="#4b5563" font-size="10" font-family="monospace">Jan 29</text>
+        <text x="460" y="195" fill="#4b5563" font-size="10" font-family="monospace" text-anchor="middle">Feb 27</text>
+        <text x="990" y="195" fill="#4b5563" font-size="10" font-family="monospace" text-anchor="end">Mar 27</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="section-label"><h2>GHL Opportunity Pipeline</h2></div>
+
+  <div class="pipeline-grid">
+
+    <div class="pipeline-col">
+      <div class="pipeline-col-header" style="border-top: 2px solid #4ade80;">
+        <span class="pipeline-col-title">Job Fully Booked</span>
+        <span class="pipeline-col-count">3 opps</span>
+      </div>
+      <div class="pipeline-cards">
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">Jack Grover</div><div class="opp-avatar">HB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">Dan Ashton</div><div class="opp-avatar">HB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">Serena He</div><div class="opp-avatar">LB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+      </div>
+    </div>
+
+    <div class="pipeline-col">
+      <div class="pipeline-col-header" style="border-top: 2px solid #60a5fa;">
+        <span class="pipeline-col-title">To Book / Awaiting Finance</span>
+        <span class="pipeline-col-count">1 opp</span>
+      </div>
+      <div class="pipeline-cards">
+        <div class="opp-card">
+          <div class="opp-row"><div class="opp-name">Jon Haile</div><div class="opp-avatar" style="background: linear-gradient(135deg,#6b7280,#374151)">JH</div></div>
+          <div class="opp-value">Opportunity Value: £0.00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pipeline-col">
+      <div class="pipeline-col-header" style="border-top: 2px solid #f59e0b;">
+        <span class="pipeline-col-title">Awaiting Paperwork</span>
+        <span class="pipeline-col-count">9 opps</span>
+      </div>
+      <div class="pipeline-cards">
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">Ryan Davies</div><div class="opp-avatar">HB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">Salman</div><div class="opp-avatar">HB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">David Harris</div><div class="opp-avatar">HB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">Charlotte Bamford</div><div class="opp-avatar">HB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">Carl Banning Lead</div><div class="opp-avatar" style="background:linear-gradient(135deg,#6b7280,#374151)">CB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+        <div class="opp-card"><div class="opp-row"><div class="opp-name">Richard Crooke</div><div class="opp-avatar">HB</div></div><div class="opp-value">Opportunity Value: £0.00</div></div>
+        <div class="opp-card" style="border-style:dashed; opacity:0.4;"><div class="opp-name">+ 3 more</div><div class="opp-value">Scroll to view all</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">Campaign Portfolio</div>
+    <div class="footer-note">Google Ads · GoHighLevel CRM · Jan–Mar 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>

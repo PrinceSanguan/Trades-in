@@ -1,0 +1,210 @@
+.section {
+    background: transparent;
+    padding: 4rem 0;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.subtitle {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #4b5563;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    border: 2px solid rgba(17, 24, 39, 0.15);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.card:hover {
+    border-color: rgba(17, 24, 39, 0.18);
+    box-shadow: 0 5px 8px -3px rgb(0 0 0 / 0.02);
+}
+
+.popularBadge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #111827;
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.iconWrapper {
+    width: 4rem;
+    height: 4rem;
+    background: #ffffff;
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: #374151;
+}
+
+.iconWrapper svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+.cardTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.priceRow {
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #374151;
+}
+
+.priceSuffix {
+    font-size: 1rem;
+    color: #6b7280;
+}
+
+.featureList {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #4b5563;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.checkIcon {
+    width: 1rem;
+    height: 1rem;
+    color: #111827;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.getQuoteBtn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: #111827;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+.getQuoteBtn:hover { background: #374151; }
+
+.ctaButtons {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.ctaPhone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    background: #111827;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaPhone:hover { background: #374151; }
+
+.ctaWhatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    background: #111827;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaWhatsapp:hover { background: #374151; }
+
+.ctaQuote {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    border: 2px solid #111827;
+    color: #374151;
+    background: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaQuote:hover { background: #ffffff; }
+
+.icon { width: 1.25rem; height: 1.25rem; }

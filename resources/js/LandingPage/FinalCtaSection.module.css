@@ -1,0 +1,137 @@
+.section {
+    background: transparent;
+    padding: 4rem 0;
+}
+
+.container {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.65rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #111827;
+}
+
+@media (min-width: 768px) {
+    .title { font-size: 1.65rem; }
+    .section { padding: 5rem 0; }
+}
+
+.emphasis {
+    color: #ff6900;
+}
+
+.subtitle {
+    margin: 0.75rem 0 0;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.description {
+    margin: 0.5rem 0 0;
+    color: rgba(0, 0, 0, 0.72);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.guaranteeTag {
+    max-width: 56rem;
+    margin: 1.25rem auto 0;
+    padding: 0.95rem 1.1rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    box-shadow:
+        -4px -4px 8px rgba(255, 255, 255, 0.5),
+        5px 6px 11px rgba(0, 0, 0, 0.05);
+    color: #111827;
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.guaranteeIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+}
+
+.trustStrip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 64rem;
+    margin: 2rem auto 0;
+}
+
+.trustItem {
+    padding: 1.25rem;
+    border-radius: calc(var(--radius, 0.75rem) + 0.875rem);
+    background: #ffffff;
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    box-shadow:
+        -4px -4px 8px rgba(255, 255, 255, 0.5),
+        5px 6px 11px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+}
+
+.trustItem:hover {
+    border-color: rgba(17, 24, 39, 0.18);
+    box-shadow:
+        -5px -5px 10px rgba(255, 255, 255, 0.5),
+        6px 7px 12px rgba(0, 0, 0, 0.05);
+}
+
+.trustLabel {
+    margin: 0;
+    color: #ff7a00;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.trustDetail {
+    margin: 0.45rem 0 0;
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+@media (min-width: 768px) {
+    .trustStrip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .guaranteeTag {
+        border-radius: 1rem;
+        padding: 0.9rem 1rem;
+    }
+
+    .trustStrip {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,816 @@
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@source "../views";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-heading:
+        'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-body:
+        'Roboto', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: var(--font-body);
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    body {
+        font-family: var(--font-body);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-heading);
+    }
+}
+
+:root {
+    /* Monochrome palette: black/white only (opacity allowed). */
+    --background: oklch(1 0 0);
+    --foreground: oklch(0 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0 0 0);
+    --primary: oklch(0 0 0);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0 0 0 / 0.04);
+    --secondary-foreground: oklch(0 0 0);
+    --muted: oklch(0 0 0 / 0.04);
+    --muted-foreground: oklch(0 0 0 / 0.72);
+    --accent: oklch(0 0 0 / 0.04);
+    --accent-foreground: oklch(0 0 0);
+    --destructive: oklch(0 0 0);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0 0 0 / 0.16);
+    --input: oklch(0 0 0 / 0.16);
+    --ring: oklch(0 0 0);
+    --chart-1: oklch(0 0 0);
+    --chart-2: oklch(0 0 0);
+    --chart-3: oklch(0 0 0);
+    --chart-4: oklch(0 0 0);
+    --chart-5: oklch(0 0 0);
+    --radius: 0.625rem;
+
+    --sidebar: oklch(1 0 0);
+    --sidebar-foreground: oklch(0 0 0);
+    --sidebar-primary: oklch(0 0 0);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0 0 0 / 0.04);
+    --sidebar-accent-foreground: oklch(0 0 0);
+    --sidebar-border: oklch(0 0 0 / 0.16);
+    --sidebar-ring: oklch(0 0 0);
+
+    /* Override Tailwind palette tokens to monochrome. */
+    --color-white: oklch(1 0 0);
+    --color-black: oklch(0 0 0);
+
+    --color-gray-50: oklch(1 0 0);
+    --color-gray-100: oklch(0 0 0 / 0.03);
+    --color-gray-200: oklch(0 0 0 / 0.08);
+    --color-gray-300: oklch(0 0 0 / 0.12);
+    --color-gray-400: oklch(0 0 0 / 0.35);
+    --color-gray-500: oklch(0 0 0 / 0.55);
+    --color-gray-600: oklch(0 0 0 / 0.7);
+    --color-gray-700: oklch(0 0 0 / 0.82);
+    --color-gray-800: oklch(0 0 0 / 0.9);
+    --color-gray-900: oklch(0 0 0);
+    --color-gray-950: oklch(0 0 0);
+
+    --color-blue-50: oklch(0 0 0 / 0.03);
+    --color-blue-200: oklch(0 0 0 / 0.12);
+    --color-blue-500: oklch(0 0 0);
+    --color-blue-800: oklch(0 0 0);
+    --color-blue-900: oklch(0 0 0);
+    --color-blue-950: oklch(0 0 0);
+
+    --color-green-50: oklch(0 0 0 / 0.03);
+    --color-green-200: oklch(0 0 0 / 0.12);
+    --color-green-400: oklch(0 0 0);
+    --color-green-500: oklch(0 0 0);
+    --color-green-800: oklch(0 0 0);
+    --color-green-900: oklch(0 0 0);
+    --color-green-950: oklch(0 0 0);
+
+    --color-red-50: oklch(0 0 0 / 0.03);
+    --color-red-100: oklch(0 0 0 / 0.06);
+    --color-red-200: oklch(0 0 0 / 0.12);
+    --color-red-400: oklch(0 0 0);
+    --color-red-500: oklch(0 0 0);
+    --color-red-600: oklch(0 0 0);
+    --color-red-700: oklch(0 0 0);
+    --color-red-800: oklch(0 0 0);
+    --color-red-900: oklch(0 0 0);
+    --color-red-950: oklch(0 0 0);
+}
+
+.dark {
+    --background: oklch(0 0 0);
+    --foreground: oklch(1 0 0);
+    --card: oklch(0 0 0);
+    --card-foreground: oklch(1 0 0);
+    --popover: oklch(0 0 0);
+    --popover-foreground: oklch(1 0 0);
+    --primary: oklch(1 0 0);
+    --primary-foreground: oklch(0 0 0);
+    --secondary: oklch(1 0 0 / 0.06);
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(1 0 0 / 0.06);
+    --muted-foreground: oklch(1 0 0 / 0.78);
+    --accent: oklch(1 0 0 / 0.06);
+    --accent-foreground: oklch(1 0 0);
+    --destructive: oklch(1 0 0);
+    --destructive-foreground: oklch(0 0 0);
+    --border: oklch(1 0 0 / 0.22);
+    --input: oklch(1 0 0 / 0.22);
+    --ring: oklch(1 0 0);
+    --chart-1: oklch(1 0 0);
+    --chart-2: oklch(1 0 0);
+    --chart-3: oklch(1 0 0);
+    --chart-4: oklch(1 0 0);
+    --chart-5: oklch(1 0 0);
+    --sidebar: oklch(0 0 0);
+    --sidebar-foreground: oklch(1 0 0);
+    --sidebar-primary: oklch(1 0 0);
+    --sidebar-primary-foreground: oklch(0 0 0);
+    --sidebar-accent: oklch(1 0 0 / 0.06);
+    --sidebar-accent-foreground: oklch(1 0 0);
+    --sidebar-border: oklch(1 0 0 / 0.22);
+    --sidebar-ring: oklch(1 0 0);
+
+    --color-gray-50: oklch(0 0 0);
+    --color-gray-100: oklch(1 0 0 / 0.06);
+    --color-gray-200: oklch(1 0 0 / 0.1);
+    --color-gray-300: oklch(1 0 0 / 0.14);
+    --color-gray-400: oklch(1 0 0 / 0.35);
+    --color-gray-500: oklch(1 0 0 / 0.55);
+    --color-gray-600: oklch(1 0 0 / 0.7);
+    --color-gray-700: oklch(1 0 0 / 0.82);
+    --color-gray-800: oklch(1 0 0 / 0.9);
+    --color-gray-900: oklch(1 0 0);
+    --color-gray-950: oklch(1 0 0);
+
+    --color-blue-50: oklch(1 0 0 / 0.06);
+    --color-blue-200: oklch(1 0 0 / 0.14);
+    --color-blue-500: oklch(1 0 0);
+    --color-blue-800: oklch(1 0 0);
+    --color-blue-900: oklch(1 0 0);
+    --color-blue-950: oklch(1 0 0);
+
+    --color-green-50: oklch(1 0 0 / 0.06);
+    --color-green-200: oklch(1 0 0 / 0.14);
+    --color-green-400: oklch(1 0 0);
+    --color-green-500: oklch(1 0 0);
+    --color-green-800: oklch(1 0 0);
+    --color-green-900: oklch(1 0 0);
+    --color-green-950: oklch(1 0 0);
+
+    --color-red-50: oklch(1 0 0 / 0.06);
+    --color-red-100: oklch(1 0 0 / 0.1);
+    --color-red-200: oklch(1 0 0 / 0.14);
+    --color-red-400: oklch(1 0 0);
+    --color-red-500: oklch(1 0 0);
+    --color-red-600: oklch(1 0 0);
+    --color-red-700: oklch(1 0 0);
+    --color-red-800: oklch(1 0 0);
+    --color-red-900: oklch(1 0 0);
+    --color-red-950: oklch(1 0 0);
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        min-height: 100vh;
+        background: #ffffff;
+    }
+}
+
+main.landing-page {
+    --landing-bg: rgba(255, 255, 255, 0.88);
+    --landing-surface: rgba(255, 255, 255, 0.96);
+    --landing-surface-strong: rgba(255, 255, 255, 0.98);
+    --landing-glass: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.96));
+    --landing-stroke: rgba(17, 24, 39, 0.15);
+    --landing-stroke-strong: rgba(17, 24, 39, 0.18);
+    --landing-radius-card: 1.4rem;
+    --landing-radius-item: 1rem;
+    --landing-radius-control: 0.95rem;
+    --landing-shadow-soft:
+        -2px -2px 4px rgba(255, 255, 255, 0.3),
+        3px 3px 6px rgba(0, 0, 0, 0.015);
+    --landing-shadow-soft-hover:
+        -3px -3px 6px rgba(255, 255, 255, 0.35),
+        4px 4px 8px rgba(0, 0, 0, 0.02);
+    --landing-shadow-item:
+        -2px -2px 4px rgba(255, 255, 255, 0.3),
+        2px 2px 5px rgba(0, 0, 0, 0.015);
+    --landing-shadow-pressed:
+        inset 1px 1px 2px rgba(0, 0, 0, 0.015),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.3);
+    --landing-shadow-button:
+        -2px -2px 4px rgba(255, 255, 255, 0.3),
+        2px 2px 5px rgba(0, 0, 0, 0.015);
+    --landing-text: #000000;
+    --landing-text-muted: rgba(0, 0, 0, 0.62);
+    --landing-accent: #ff6900;
+    --landing-accent-2: #ff8802;
+    --landing-button-shell: linear-gradient(145deg, rgba(255, 146, 47, 0.98), rgba(255, 105, 0, 0.96));
+    --landing-button-face: linear-gradient(135deg, rgba(255, 156, 69, 1), rgba(255, 105, 0, 1) 56%, rgba(255, 136, 2, 1));
+    --landing-button-text: rgba(255, 247, 240, 0.98);
+    --landing-button-text-shadow: 0 1px 0 rgba(120, 47, 0, 0.12);
+    position: relative;
+    overflow: clip;
+    color: var(--landing-text);
+}
+
+main.landing-page::before,
+main.landing-page::after {
+    content: none;
+    position: absolute;
+    inset: auto;
+    border-radius: 999px;
+    filter: blur(20px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+main.landing-page::before {
+    top: 4rem;
+    left: -8rem;
+    width: 22rem;
+    height: 22rem;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 68%);
+}
+
+main.landing-page::after {
+    right: -7rem;
+    top: 26rem;
+    width: 24rem;
+    height: 24rem;
+    background: radial-gradient(circle, rgba(255, 105, 0, 0.08) 0%, rgba(255, 105, 0, 0) 68%);
+}
+
+main.landing-page > * {
+    position: relative;
+    z-index: 1;
+}
+
+main.landing-page section {
+    background: transparent !important;
+}
+
+main.landing-page h1,
+main.landing-page h2,
+main.landing-page h3,
+main.landing-page h4,
+main.landing-page h5,
+main.landing-page h6 {
+    color: var(--landing-text);
+}
+
+main.landing-page :where(p, li, span, strong) {
+    color: inherit;
+}
+
+main.landing-page :where(.lead, p)[class*='subtitle'],
+main.landing-page :where(p, span, div)[class*='description'],
+main.landing-page :where(p, span, div)[class*='label'],
+main.landing-page :where(p, span, div)[class*='location'],
+main.landing-page :where(p, span, div)[class*='muted'],
+main.landing-page :where(p, span, div)[class*='priceSuffix'],
+main.landing-page :where(p, span, div)[class*='price'] {
+    color: var(--landing-text-muted) !important;
+}
+
+main.landing-page span[class*='eyebrow'],
+main.landing-page span[class*='popularBadge'],
+main.landing-page span[class*='badge']:not([class*='badgeLabel']) {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 24, 39, 0.15) !important;
+    color: var(--landing-accent) !important;
+    box-shadow: var(--landing-shadow-button) !important;
+    backdrop-filter: none;
+}
+
+main.landing-page :where(div, article, aside)[class*='card'],
+main.landing-page :where(div, article, aside)[class*='step'],
+main.landing-page :where(div, article, aside)[class*='stat']:not([class*='statsGrid']),
+main.landing-page :where(div, article, aside)[class*='aside'],
+main.landing-page :where(div, article, aside)[class*='trustBadges'],
+main.landing-page :where(div, article, aside)[class*='certCard'],
+main.landing-page :where(div, article, aside)[class*='areaCard'],
+main.landing-page :where(div, article, aside)[class*='faqItem'],
+main.landing-page :where(div, article, aside)[class*='videoWrapper'],
+main.landing-page :where(div, article, aside)[class*='videoPlaceholder'],
+main.landing-page :where(div, article, aside)[class*='imageCol'],
+main.landing-page :where(div, article, aside)[class*='dialog'],
+main.landing-page :where(div, article, aside)[class*='formWrapper'],
+main.landing-page :where(div, article, aside)[class*='verificationForm'],
+main.landing-page :where(div, article, aside)[class*='infoBox'],
+main.landing-page :where(div, article, aside)[class*='person'],
+main.landing-page :where(div, article, aside)[class*='field'],
+main.landing-page :where(div, article, aside)[class*='faqAnswer'] {
+    background: var(--landing-glass) !important;
+    border: 1px solid var(--landing-stroke) !important;
+    border-radius: var(--landing-radius-card) !important;
+    box-shadow: var(--landing-shadow-soft) !important;
+    backdrop-filter: none;
+}
+
+main.landing-page :where(div, article, aside)[class*='card']:hover,
+main.landing-page :where(div, article, aside)[class*='step']:hover,
+main.landing-page :where(div, article, aside)[class*='stat']:not([class*='statsGrid']):hover,
+main.landing-page :where(div, article, aside)[class*='certCard']:hover,
+main.landing-page :where(div, article, aside)[class*='areaCard']:hover,
+main.landing-page :where(div, article, aside)[class*='faqItem']:hover,
+main.landing-page :where(div, article, aside)[class*='videoWrapper']:hover,
+main.landing-page :where(div, article, aside)[class*='imageCol']:hover,
+main.landing-page :where(div, article, aside)[class*='dialog']:hover,
+main.landing-page :where(div, article, aside)[class*='verificationForm']:hover,
+main.landing-page :where(div, article, aside)[class*='infoBox']:hover,
+main.landing-page :where(div, article, aside)[class*='person']:hover,
+main.landing-page :where(div, article, aside)[class*='field']:hover,
+main.landing-page :where(div, article, aside)[class*='faqAnswer']:hover {
+    box-shadow: var(--landing-shadow-soft-hover) !important;
+    border-color: var(--landing-stroke-strong) !important;
+    transform: none;
+}
+
+main.landing-page :where(div, li, article)[class*='featureItem'],
+main.landing-page :where(div, li, article)[class*='badgeItem'],
+main.landing-page :where(div, li, article)[class*='priceRow'],
+main.landing-page :where(ul, ol)[class*='featureList'] > li,
+main.landing-page :where(ul, ol)[class*='asideList'] > li,
+main.landing-page :where(ul, ol)[class*='infoList'] > li {
+    background: linear-gradient(145deg, rgba(244, 244, 244, 0.98), rgba(232, 232, 232, 0.94)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.42) !important;
+    box-shadow: var(--landing-shadow-item) !important;
+    border-radius: var(--landing-radius-item) !important;
+}
+
+main.landing-page :where(div, li, article)[class*='featureItem'],
+main.landing-page :where(div, li, article)[class*='badgeItem'],
+main.landing-page :where(div, li, article)[class*='priceRow'],
+main.landing-page :where(ul, ol)[class*='featureList'] > li,
+main.landing-page :where(ul, ol)[class*='asideList'] > li,
+main.landing-page :where(ul, ol)[class*='infoList'] > li {
+    padding: 0.9rem 1rem;
+}
+
+main.landing-page :where(div, li, article)[class*='badgeItem'] {
+    min-width: 8.25rem;
+}
+
+main.landing-page :where(div)[class*='badgeGrid'],
+main.landing-page :where(div)[class*='statsGrid'] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+main.landing-page :where(div, li, article)[class*='priceRow'] {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+}
+
+main.landing-page :where(ul, ol)[class*='featureList'],
+main.landing-page :where(ul, ol)[class*='asideList'],
+main.landing-page :where(ul, ol)[class*='infoList'] {
+    gap: 0.75rem !important;
+}
+
+main.landing-page :where(input, select, textarea) {
+    background: linear-gradient(145deg, rgba(246, 246, 246, 0.98), rgba(236, 236, 236, 0.94)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.46) !important;
+    border-radius: var(--landing-radius-control) !important;
+    box-shadow:
+        inset 2px 2px 5px rgba(0, 0, 0, 0.04),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.78),
+        var(--landing-shadow-item) !important;
+    color: var(--landing-text) !important;
+}
+
+main.landing-page :where(button)[class*='faqQuestion'],
+main.landing-page :where(button, a)[class*='linkBtn'],
+main.landing-page :where(p, div)[class*='error'],
+main.landing-page :where(p, div)[class*='success'],
+main.landing-page :where(div)[class*='topActions'],
+main.landing-page iframe {
+    border-radius: 0 !important;
+}
+
+main.landing-page :where(div)[class*='formHeader'],
+main.landing-page :where(div)[class*='fields'],
+main.landing-page :where(div)[class*='actions'],
+main.landing-page :where(div)[class*='body'],
+main.landing-page :where(div)[class*='header'] {
+    border-radius: var(--landing-radius-item);
+}
+
+main.landing-page :where(input, select, textarea):focus-visible,
+main.landing-page :where(input, select, textarea):focus {
+    outline: 0.16rem solid rgba(255, 105, 0, 0.18);
+    outline-offset: 0.08rem;
+    border-color: rgba(255, 255, 255, 0.58) !important;
+}
+
+main.landing-page :where(div)[class*='iconWrapper'],
+main.landing-page :where(div)[class*='cardIcon'],
+main.landing-page :where(div)[class*='certIcon'],
+main.landing-page :where(div)[class*='numberBadge'],
+main.landing-page :where(button)[class*='playBtn'],
+main.landing-page :where(div)[class*='teamAvatar'],
+main.landing-page :where(div)[class*='imagePlaceholder'],
+main.landing-page :where(div)[class*='avatar'],
+main.landing-page :where(div)[class*='badgeIcon'] {
+    background: transparent !important;
+    color: #ff7a00 !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+main.landing-page :where(div)[class*='iconWrapper'] svg,
+main.landing-page :where(div)[class*='cardIcon'] svg,
+main.landing-page :where(div)[class*='certIcon'] svg,
+main.landing-page :where(div)[class*='numberBadge'] svg,
+main.landing-page :where(button)[class*='playBtn'] svg,
+main.landing-page :where(div)[class*='teamAvatar'] svg,
+main.landing-page :where(div)[class*='imagePlaceholder'] svg,
+main.landing-page :where(div)[class*='avatar'] svg,
+main.landing-page :where(div)[class*='badgeIcon'] svg {
+    color: #ff7a00 !important;
+    filter: drop-shadow(0 0.2rem 0.4rem rgba(255, 105, 0, 0.08));
+}
+
+main.landing-page :where(div)[class*='iconWrapper'] svg *,
+main.landing-page :where(div)[class*='cardIcon'] svg *,
+main.landing-page :where(div)[class*='certIcon'] svg *,
+main.landing-page :where(div)[class*='numberBadge'] svg *,
+main.landing-page :where(button)[class*='playBtn'] svg *,
+main.landing-page :where(div)[class*='teamAvatar'] svg *,
+main.landing-page :where(div)[class*='imagePlaceholder'] svg *,
+main.landing-page :where(div)[class*='avatar'] svg *,
+main.landing-page :where(div)[class*='badgeIcon'] svg *,
+main.landing-page :where(.chevron, .checkIcon, .featureIcon, .areaIcon, .playIcon, .stars, .cardStars, .icon, .badgeIcon, .iconWrapper, .cardIcon, .certIcon) svg *,
+main.landing-page :where(.chevron, .checkIcon, .featureIcon, .areaIcon, .playIcon, .stars, .cardStars, .icon, .badgeIcon, .iconWrapper, .cardIcon, .certIcon) * {
+    stroke: url(#landing-icon-gradient) !important;
+    fill: url(#landing-icon-gradient) !important;
+}
+
+main.landing-page :where(div)[class*='iconWrapper'] svg [fill='none'],
+main.landing-page :where(div)[class*='cardIcon'] svg [fill='none'],
+main.landing-page :where(div)[class*='certIcon'] svg [fill='none'],
+main.landing-page :where(div)[class*='numberBadge'] svg [fill='none'],
+main.landing-page :where(button)[class*='playBtn'] svg [fill='none'],
+main.landing-page :where(div)[class*='teamAvatar'] svg [fill='none'],
+main.landing-page :where(div)[class*='imagePlaceholder'] svg [fill='none'],
+main.landing-page :where(div)[class*='avatar'] svg [fill='none'],
+main.landing-page :where(div)[class*='badgeIcon'] svg [fill='none'],
+main.landing-page :where(.chevron, .checkIcon, .featureIcon, .areaIcon, .playIcon, .stars, .cardStars, .icon, .badgeIcon, .iconWrapper, .cardIcon, .certIcon) svg [fill='none'],
+main.landing-page :where(.chevron, .checkIcon, .featureIcon, .areaIcon, .playIcon, .stars, .cardStars, .icon, .badgeIcon, .iconWrapper, .cardIcon, .certIcon) [fill='none'] {
+    fill: none !important;
+}
+
+main.landing-page :where(button)[class*='faqQuestion'] {
+    color: var(--landing-text);
+}
+
+main.landing-page :where(button)[class*='faqQuestion']:hover {
+    background: rgba(255, 255, 255, 0.24) !important;
+}
+
+main.landing-page :where(.chevron, .checkIcon, .featureIcon, .areaIcon, .playIcon, .stars, .cardStars, .icon, .badgeIcon, .iconWrapper, .cardIcon, .certIcon) {
+    color: #ff7a00 !important;
+}
+
+main.landing-page :where(.questionText, .ratingText, .author, .certName, .teamRole, .areaName, .stepTitle) {
+    color: var(--landing-text) !important;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone'],
+main.landing-page :where(a, button)[class*='CtaPhone'],
+main.landing-page :where(a, button)[class*='ctaWhatsapp'],
+main.landing-page :where(a, button)[class*='CtaWhatsapp'],
+main.landing-page :where(a, button)[class*='ctaQuote'],
+main.landing-page :where(a, button)[class*='CtaQuote'],
+main.landing-page :where(a, button)[class*='getQuoteBtn'],
+main.landing-page :where(button)[class*='playBtn'] {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 999px;
+    border: none !important;
+    background: var(--landing-button-shell) !important;
+    box-shadow: var(--landing-shadow-button) !important;
+    color: var(--landing-button-text) !important;
+    overflow: visible;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 250ms ease, box-shadow 250ms ease;
+    text-shadow: var(--landing-button-text-shadow);
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone'],
+main.landing-page :where(a, button)[class*='CtaPhone'],
+main.landing-page :where(a, button)[class*='ctaWhatsapp'],
+main.landing-page :where(a, button)[class*='CtaWhatsapp'],
+main.landing-page :where(a, button)[class*='ctaQuote'],
+main.landing-page :where(a, button)[class*='CtaQuote'],
+main.landing-page :where(a, button)[class*='getQuoteBtn'] {
+    padding: 0.14rem !important;
+    min-height: 3.3rem;
+    padding-inline: 1.4rem !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+main.landing-page :where(button)[class*='playBtn'] {
+    padding: 0 !important;
+}
+
+main.landing-page :where(a, button)[class*='getQuoteBtn'] {
+    width: 100%;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone']::after,
+main.landing-page :where(a, button)[class*='CtaPhone']::after,
+main.landing-page :where(a, button)[class*='ctaWhatsapp']::after,
+main.landing-page :where(a, button)[class*='CtaWhatsapp']::after,
+main.landing-page :where(a, button)[class*='ctaQuote']::after,
+main.landing-page :where(a, button)[class*='CtaQuote']::after,
+main.landing-page :where(a, button)[class*='getQuoteBtn']::after,
+main.landing-page :where(button)[class*='playBtn']::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    width: calc(100% + 0.24em);
+    height: calc(100% + 0.24em);
+    top: -0.12em;
+    left: -0.12em;
+    border-radius: inherit;
+    background: linear-gradient(-135deg, rgba(5, 5, 5, 0.16), transparent 22%, transparent 100%);
+    filter: blur(0.0125em);
+    opacity: 0.14;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone']::before,
+main.landing-page :where(a, button)[class*='CtaPhone']::before,
+main.landing-page :where(a, button)[class*='ctaWhatsapp']::before,
+main.landing-page :where(a, button)[class*='CtaWhatsapp']::before,
+main.landing-page :where(a, button)[class*='ctaQuote']::before,
+main.landing-page :where(a, button)[class*='CtaQuote']::before,
+main.landing-page :where(a, button)[class*='getQuoteBtn']::before {
+    content: '';
+    position: absolute;
+    inset: 0.14rem;
+    z-index: 0;
+    border-radius: inherit;
+    background-image: var(--landing-button-face);
+    box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.04),
+        -0.035em -0.035em 0.04em 0 inset rgba(5, 5, 5, 0.1),
+        0 0 0 0 inset rgba(5, 5, 5, 0.04),
+        0 0 0.05em 0.18em inset rgba(255, 214, 187, 0.24),
+        0.018em 0.035em 0.07em 0 inset rgba(255, 232, 214, 0.56),
+        0.08em 0.08em 0.08em inset rgba(255, 226, 201, 0.12),
+        -0.05em -0.14em 0.16em 0.07em inset rgba(118, 42, 0, 0.2);
+    transition: box-shadow 300ms ease, transform 250ms ease;
+    will-change: box-shadow, transform;
+    pointer-events: none;
+}
+
+main.landing-page :where(button)[class*='playBtn']::before {
+    content: '';
+    position: absolute;
+    inset: 0.2rem;
+    z-index: 0;
+    border-radius: inherit;
+    background-image: var(--landing-button-face);
+    box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.04),
+        -0.035em -0.035em 0.04em 0 inset rgba(5, 5, 5, 0.1),
+        0 0 0 0 inset rgba(5, 5, 5, 0.04),
+        0 0 0.05em 0.18em inset rgba(255, 214, 187, 0.24),
+        0.018em 0.035em 0.07em 0 inset rgba(255, 232, 214, 0.56),
+        0.08em 0.08em 0.08em inset rgba(255, 226, 201, 0.12),
+        -0.05em -0.14em 0.16em 0.07em inset rgba(118, 42, 0, 0.2);
+    transition: box-shadow 300ms ease, transform 250ms ease;
+    will-change: box-shadow, transform;
+    pointer-events: none;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone']:hover::before,
+main.landing-page :where(a, button)[class*='CtaPhone']:hover::before,
+main.landing-page :where(a, button)[class*='ctaWhatsapp']:hover::before,
+main.landing-page :where(a, button)[class*='CtaWhatsapp']:hover::before,
+main.landing-page :where(a, button)[class*='ctaQuote']:hover::before,
+main.landing-page :where(a, button)[class*='CtaQuote']:hover::before,
+main.landing-page :where(a, button)[class*='getQuoteBtn']:hover::before,
+main.landing-page :where(button)[class*='playBtn']:hover::before {
+    box-shadow:
+    0.08em 0.12em 0.045em 0 inset rgba(110, 36, 0, 0.34),
+    -0.022em -0.026em 0.04em 0.02em inset rgba(128, 42, 0, 0.22),
+    0.2em 0.2em 0.14em 0 inset rgba(120, 40, 0, 0.16),
+    0 0 0.08em 0.42em inset rgba(255, 224, 201, 0.14),
+    0 0 0 0 inset rgba(255, 245, 236, 0.92),
+    0.08em 0.08em 0.08em inset rgba(255, 228, 208, 0.2),
+    -0.05em -0.08em 0.14em 0.08em inset rgba(112, 38, 0, 0.18);
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone']:hover,
+main.landing-page :where(a, button)[class*='CtaPhone']:hover,
+main.landing-page :where(a, button)[class*='ctaWhatsapp']:hover,
+main.landing-page :where(a, button)[class*='CtaWhatsapp']:hover,
+main.landing-page :where(a, button)[class*='ctaQuote']:hover,
+main.landing-page :where(a, button)[class*='CtaQuote']:hover,
+main.landing-page :where(a, button)[class*='getQuoteBtn']:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow:
+        -8px -8px 16px rgba(255, 196, 150, 0.42),
+        12px 16px 24px rgba(109, 38, 0, 0.22) !important;
+}
+
+main.landing-page :where(button)[class*='playBtn']:hover {
+    transform: translateY(-2px) scale(1.035);
+    box-shadow:
+        -8px -8px 16px rgba(255, 196, 150, 0.42),
+        12px 16px 24px rgba(109, 38, 0, 0.22) !important;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone']:active::before,
+main.landing-page :where(a, button)[class*='CtaPhone']:active::before,
+main.landing-page :where(a, button)[class*='ctaWhatsapp']:active::before,
+main.landing-page :where(a, button)[class*='CtaWhatsapp']:active::before,
+main.landing-page :where(a, button)[class*='ctaQuote']:active::before,
+main.landing-page :where(a, button)[class*='CtaQuote']:active::before,
+main.landing-page :where(a, button)[class*='getQuoteBtn']:active::before,
+main.landing-page :where(button)[class*='playBtn']:active::before {
+    transform: scale(0.975);
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone'] > *,
+main.landing-page :where(a, button)[class*='CtaPhone'] > *,
+main.landing-page :where(a, button)[class*='ctaWhatsapp'] > *,
+main.landing-page :where(a, button)[class*='CtaWhatsapp'] > *,
+main.landing-page :where(a, button)[class*='ctaQuote'] > *,
+main.landing-page :where(a, button)[class*='CtaQuote'] > *,
+main.landing-page :where(a, button)[class*='getQuoteBtn'] > *,
+main.landing-page :where(button)[class*='playBtn'] > * {
+    position: relative;
+    z-index: 2;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone'] svg,
+main.landing-page :where(a, button)[class*='CtaPhone'] svg,
+main.landing-page :where(a, button)[class*='ctaWhatsapp'] svg,
+main.landing-page :where(a, button)[class*='CtaWhatsapp'] svg,
+main.landing-page :where(a, button)[class*='ctaQuote'] svg,
+main.landing-page :where(a, button)[class*='CtaQuote'] svg,
+main.landing-page :where(a, button)[class*='getQuoteBtn'] svg,
+main.landing-page :where(button)[class*='playBtn'] svg {
+    color: var(--landing-button-text);
+    filter: drop-shadow(0 0 0.08em rgba(138, 54, 0, 0.18));
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone'] svg *,
+main.landing-page :where(a, button)[class*='CtaPhone'] svg *,
+main.landing-page :where(a, button)[class*='ctaWhatsapp'] svg *,
+main.landing-page :where(a, button)[class*='CtaWhatsapp'] svg *,
+main.landing-page :where(a, button)[class*='ctaQuote'] svg *,
+main.landing-page :where(a, button)[class*='CtaQuote'] svg *,
+main.landing-page :where(a, button)[class*='getQuoteBtn'] svg *,
+main.landing-page :where(button)[class*='playBtn'] svg * {
+    fill: currentColor !important;
+    stroke: currentColor !important;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone'] svg [fill='none'],
+main.landing-page :where(a, button)[class*='CtaPhone'] svg [fill='none'],
+main.landing-page :where(a, button)[class*='ctaWhatsapp'] svg [fill='none'],
+main.landing-page :where(a, button)[class*='CtaWhatsapp'] svg [fill='none'],
+main.landing-page :where(a, button)[class*='ctaQuote'] svg [fill='none'],
+main.landing-page :where(a, button)[class*='CtaQuote'] svg [fill='none'],
+main.landing-page :where(a, button)[class*='getQuoteBtn'] svg [fill='none'],
+main.landing-page :where(button)[class*='playBtn'] svg [fill='none'] {
+    fill: none !important;
+}
+
+main.landing-page :where(a, button)[class*='ctaPhone']:hover svg,
+main.landing-page :where(a, button)[class*='CtaPhone']:hover svg,
+main.landing-page :where(a, button)[class*='ctaWhatsapp']:hover svg,
+main.landing-page :where(a, button)[class*='CtaWhatsapp']:hover svg,
+main.landing-page :where(a, button)[class*='ctaQuote']:hover svg,
+main.landing-page :where(a, button)[class*='CtaQuote']:hover svg,
+main.landing-page :where(a, button)[class*='getQuoteBtn']:hover svg,
+main.landing-page :where(button)[class*='playBtn']:hover svg {
+    filter: drop-shadow(0 0 0.18em rgba(255, 247, 240, 0.3));
+}
+
+main.landing-page iframe {
+    border-radius: 0 !important;
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    main.landing-page::before {
+        top: 2rem;
+        left: -10rem;
+        width: 18rem;
+        height: 18rem;
+    }
+
+    main.landing-page::after {
+        right: -9rem;
+        top: 18rem;
+        width: 16rem;
+        height: 16rem;
+    }
+}

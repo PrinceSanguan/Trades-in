@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satori JuJitsu · Campaign Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #05080d;
+    --surface: #090e15;
+    --card: #0e1520;
+    --border: rgba(255,255,255,0.06);
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --red: #cc2936;
+    --blue: #1a6bdb;
+    --teal: #0f9b8e;
+    --text: #e8edf5;
+    --muted: #4a5a72;
+    --green: #22c55e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Raleway', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(160px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb1 { width: 600px; height: 600px; background: rgba(201,168,76,0.05); top: -200px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(204,41,54,0.04); bottom: 100px; left: -100px; }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 36px;
+  }
+
+  .hero {
+    padding: 64px 0 52px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    margin-bottom: 52px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+  }
+
+  .kamon {
+    width: 52px; height: 52px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .kamon::before {
+    content: '';
+    position: absolute;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 50%;
+  }
+  .kamon-inner {
+    width: 18px; height: 18px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+  .badge-gold { color: var(--gold); border: 1px solid rgba(201,168,76,0.3); background: rgba(201,168,76,0.06); }
+  .badge-red  { color: var(--red);  border: 1px solid rgba(204,41,54,0.3);  background: rgba(204,41,54,0.06); }
+  .badge-teal { color: var(--teal); border: 1px solid rgba(15,155,142,0.3); background: rgba(15,155,142,0.06); }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(44px, 6.5vw, 82px);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  h1 em { font-style: normal; color: var(--gold); display: block; }
+
+  .hero-sub { font-size: 13px; color: var(--muted); margin-top: 16px; font-weight: 400; letter-spacing: 0.03em; }
+
+  .hero-right { text-align: right; }
+  .period-lbl { font-family: 'Rajdhani', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .period-val { font-family: 'Cinzel', serif; font-size: 16px; color: var(--gold2); letter-spacing: 0.04em; }
+
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 52px;
+  }
+
+  .kpi {
+    background: var(--card);
+    padding: 24px 18px 20px;
+    position: relative;
+  }
+  .kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .kpi.k1::before { background: linear-gradient(90deg, var(--gold), transparent); }
+  .kpi.k2::before { background: linear-gradient(90deg, var(--green), transparent); }
+  .kpi.k3::before { background: linear-gradient(90deg, var(--red), transparent); }
+  .kpi.k4::before { background: linear-gradient(90deg, var(--blue), transparent); }
+  .kpi.k5::before { background: linear-gradient(90deg, var(--teal), transparent); }
+
+  .kpi-lbl { font-family: 'Rajdhani', sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .kpi-val { font-family: 'Cinzel', serif; font-size: 34px; font-weight: 700; line-height: 1; }
+  .k1 .kpi-val { color: var(--gold); }
+  .k2 .kpi-val { color: var(--green); }
+  .k3 .kpi-val { color: var(--red); }
+  .k4 .kpi-val { color: #60a5fa; }
+  .k5 .kpi-val { color: var(--teal); }
+  .kpi-note { font-size: 11px; color: var(--muted); margin-top: 6px; font-weight: 400; }
+
+  .sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .sec-head h2 { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); white-space: nowrap; }
+  .sec-line { flex: 1; height: 1px; background: rgba(201,168,76,0.12); }
+
+  .camp-table { background: var(--card); border: 1px solid rgba(201,168,76,0.1); border-radius: 10px; overflow: hidden; margin-bottom: 52px; }
+
+  .ct-hdr { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr 1fr 1fr; padding: 11px 22px; background: rgba(201,168,76,0.04); border-bottom: 1px solid rgba(201,168,76,0.1); }
+  .ct-hdr span { font-family: 'Rajdhani', sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+  .ct-row { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr 1fr 1fr; padding: 16px 22px; border-bottom: 1px solid var(--border); align-items: center; transition: background 0.15s; }
+  .ct-row:last-child { border-bottom: none; }
+  .ct-row:hover { background: rgba(201,168,76,0.02); }
+
+  .ct-name { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; color: var(--text); letter-spacing: 0.01em; }
+
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .dot-live { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .dot-off  { background: var(--muted); }
+
+  .ct-cell { font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 500; color: var(--text); }
+  .ct-cell.dim { color: var(--muted); }
+
+  .cpl-chip { display: inline-block; font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+  .cpl-gold { color: var(--gold2); background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); }
+  .cpl-dim  { color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); }
+
+  .totals-row { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr 1fr 1fr; padding: 14px 22px; background: rgba(201,168,76,0.04); border-top: 1px solid rgba(201,168,76,0.12); align-items: center; }
+  .totals-lbl { font-family: 'Rajdhani', sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .totals-val { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gold2); }
+
+  .pipeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 52px; }
+
+  .pipe-col { background: var(--card); border: 1px solid rgba(201,168,76,0.1); border-radius: 10px; overflow: hidden; }
+
+  .pipe-hd { padding: 14px 18px; border-bottom: 1px solid rgba(201,168,76,0.1); display: flex; justify-content: space-between; align-items: flex-start; }
+  .pipe-title { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--text); }
+  .pipe-meta { font-family: 'Rajdhani', sans-serif; font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-align: right; }
+  .pipe-meta strong { display: block; font-size: 18px; font-weight: 600; color: var(--gold); line-height: 1; }
+
+  .pipe-body { padding: 14px; display: flex; flex-direction: column; gap: 7px; }
+
+  .lead-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.2s; }
+  .lead-card:hover { border-color: rgba(201,168,76,0.2); }
+
+  .lead-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .lead-src { font-family: 'Rajdhani', sans-serif; font-size: 10px; letter-spacing: 0.05em; color: #4267B2; }
+  .lead-val { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--gold); }
+
+  .more-pill { text-align: center; padding: 8px; font-family: 'Rajdhani', sans-serif; font-size: 11px; letter-spacing: 0.08em; color: var(--muted); border: 1px dashed rgba(201,168,76,0.15); border-radius: 6px; }
+
+  footer { border-top: 1px solid rgba(201,168,76,0.12); padding: 30px 0 44px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .f-brand { display: flex; align-items: center; gap: 14px; }
+  .f-kamon { width: 38px; height: 38px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .f-kamon-star { width: 14px; height: 14px; background: var(--gold); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+  .f-name { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 700; letter-spacing: 0.06em; color: var(--gold); }
+  .f-tagline { font-size: 11px; color: var(--muted); letter-spacing: 0.03em; margin-top: 2px; }
+  .f-right { font-family: 'Rajdhani', sans-serif; font-size: 11px; letter-spacing: 0.08em; color: var(--muted); text-align: right; line-height: 2; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .hero        { animation: fadeUp 0.6s ease both; }
+  .kpi-strip   { animation: fadeUp 0.6s ease 0.1s both; }
+  .camp-table  { animation: fadeUp 0.6s ease 0.2s both; }
+  .pipeline-grid { animation: fadeUp 0.6s ease 0.3s both; }
+
+  @media (max-width: 820px) {
+    .kpi-strip { grid-template-columns: repeat(3, 1fr); }
+    .ct-hdr, .ct-row, .totals-row { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    .ct-hdr span:nth-child(n+5), .ct-row *:nth-child(n+5), .totals-row *:nth-child(n+5) { display: none; }
+    .pipeline-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="wrapper">
+
+  <div class="hero">
+    <div>
+      <div class="kamon"><div class="kamon-inner"></div></div>
+      <div class="hero-eyebrow">
+        <span class="badge badge-gold">Lanelli Dojo</span>
+        <span class="badge badge-red">Facebook Ads</span>
+        <span class="badge badge-teal">GHL CRM</span>
+      </div>
+      <h1>Satori<em>JuJitsu</em></h1>
+      <div class="hero-sub">Kids Enquiries Pipeline · Facebook Lead Generation · Lanelli Branch</div>
+    </div>
+    <div class="hero-right">
+      <div class="period-lbl">Reporting Period</div>
+      <div class="period-val">Feb 25 – Mar 26<br>2026</div>
+    </div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi k1"><div class="kpi-lbl">Total Leads</div><div class="kpi-val">54</div><div class="kpi-note">Lead form results</div></div>
+    <div class="kpi k2"><div class="kpi-lbl">Cost / Lead</div><div class="kpi-val">£5.81</div><div class="kpi-note">Kids campaign CPL</div></div>
+    <div class="kpi k3"><div class="kpi-lbl">Spend</div><div class="kpi-val">£313</div><div class="kpi-note">Total amount spent</div></div>
+    <div class="kpi k4"><div class="kpi-lbl">Reach</div><div class="kpi-val">21.6K</div><div class="kpi-note">Unique accounts</div></div>
+    <div class="kpi k5"><div class="kpi-lbl">Fresh Leads</div><div class="kpi-val">153</div><div class="kpi-note">Pipeline · £22,800</div></div>
+  </div>
+
+  <div class="sec-head">
+    <h2>Facebook Campaigns</h2>
+    <div class="sec-line"></div>
+    <span class="badge badge-gold">3 Campaigns · 1 Active</span>
+  </div>
+
+  <div class="camp-table">
+    <div class="ct-hdr">
+      <span>Campaign</span><span>Leads</span><span>Reach</span><span>Freq.</span><span>Cost / Lead</span><span>Spent</span><span>Impressions</span>
+    </div>
+    <div class="ct-row">
+      <div class="ct-name"><div class="status-dot dot-live"></div>SATORI | LEADS | ABO | A+ | KIDS</div>
+      <div class="ct-cell">54</div><div class="ct-cell">21,612</div><div class="ct-cell">2.94</div>
+      <div class="ct-cell"><span class="cpl-chip cpl-gold">£5.81</span></div>
+      <div class="ct-cell">£313.94</div><div class="ct-cell">63,526</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-name"><div class="status-dot dot-off"></div>SATORI | LEADS | ABO | A+ | ADULTS</div>
+      <div class="ct-cell dim">—</div><div class="ct-cell dim">—</div><div class="ct-cell dim">—</div>
+      <div class="ct-cell"><span class="cpl-chip cpl-dim">Paused</span></div>
+      <div class="ct-cell dim">£0.00</div><div class="ct-cell dim">—</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-name"><div class="status-dot dot-off"></div>SATORI | LEADS | ABO</div>
+      <div class="ct-cell dim">—</div><div class="ct-cell dim">—</div><div class="ct-cell dim">—</div>
+      <div class="ct-cell"><span class="cpl-chip cpl-dim">£13.33/day</span></div>
+      <div class="ct-cell dim">£0.00</div><div class="ct-cell dim">—</div>
+    </div>
+    <div class="totals-row">
+      <div class="totals-lbl">3 Campaigns Total</div>
+      <div class="totals-val">54</div><div class="totals-val">21,612</div><div class="totals-val">2.94</div>
+      <div class="totals-val">£5.81</div><div class="totals-val">£313.94</div><div class="totals-val">63,526</div>
+    </div>
+  </div>
+
+  <div class="sec-head">
+    <h2>Kids Enquiries Pipeline</h2>
+    <div class="sec-line"></div>
+    <span class="badge badge-teal">223+ Opportunities</span>
+  </div>
+
+  <div class="pipeline-grid">
+
+    <div class="pipe-col" style="border-top: 2px solid var(--gold);">
+      <div class="pipe-hd">
+        <div><div class="pipe-title">Fresh Lead</div></div>
+        <div class="pipe-meta"><strong>153</strong>Opportunities · £22,800</div>
+      </div>
+      <div class="pipe-body">
+        <div class="lead-card"><div><div class="lead-name">Emma Jones</div><div class="lead-src">● Facebook</div></div><div class="lead-val">£150</div></div>
+        <div class="lead-card"><div><div class="lead-name">Felicity Rees</div><div class="lead-src">● Facebook</div></div><div class="lead-val">£150</div></div>
+        <div class="lead-card"><div><div class="lead-name">Rachel Hallett</div><div class="lead-src">● Facebook</div></div><div class="lead-val">£150</div></div>
+        <div class="lead-card"><div><div class="lead-name">John Taylor</div><div class="lead-src">● Facebook</div></div><div class="lead-val">£150</div></div>
+        <div class="lead-card"><div><div class="lead-name">Tanisha Davies</div><div class="lead-src">● Facebook</div></div><div class="lead-val">£150</div></div>
+        <div class="lead-card"><div><div class="lead-name">Amy Sheppard</div><div class="lead-src">● Facebook</div></div><div class="lead-val">£150</div></div>
+        <div class="more-pill">+ 147 more fresh leads</div>
+      </div>
+    </div>
+
+    <div class="pipe-col" style="border-top: 2px solid var(--teal);">
+      <div class="pipe-hd">
+        <div><div class="pipe-title">Campaign Summary</div></div>
+        <div class="pipe-meta"><strong>54</strong>Leads Generated</div>
+      </div>
+      <div class="pipe-body">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:4px;">
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:14px 16px;">
+            <div style="font-family:'Rajdhani',sans-serif; font-size:9px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Total Reach</div>
+            <div style="font-family:'Cinzel',serif; font-size:26px; font-weight:700; color:#60a5fa;">21.6K</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px;">Unique accounts</div>
+          </div>
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:14px 16px;">
+            <div style="font-family:'Rajdhani',sans-serif; font-size:9px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Impressions</div>
+            <div style="font-family:'Cinzel',serif; font-size:26px; font-weight:700; color:var(--teal);">63.5K</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px;">Total impressions</div>
+          </div>
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:14px 16px;">
+            <div style="font-family:'Rajdhani',sans-serif; font-size:9px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Frequency</div>
+            <div style="font-family:'Cinzel',serif; font-size:26px; font-weight:700; color:var(--gold2);">2.94</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px;">Avg per account</div>
+          </div>
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:14px 16px;">
+            <div style="font-family:'Rajdhani',sans-serif; font-size:9px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Pipeline Value</div>
+            <div style="font-family:'Cinzel',serif; font-size:26px; font-weight:700; color:var(--green);">£22.8K</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px;">Fresh leads value</div>
+          </div>
+        </div>
+        <div style="background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.15); border-radius:6px; padding:14px 16px; margin-top:4px;">
+          <div style="font-family:'Rajdhani',sans-serif; font-size:9px; letter-spacing:.13em; text-transform:uppercase; color:var(--gold); margin-bottom:6px;">Efficiency Highlight</div>
+          <div style="font-size:12px; color:var(--text); line-height:1.7; font-weight:400;">
+            At <span style="color:var(--gold2); font-weight:600;">£5.81 per lead</span>, the Kids campaign generated
+            <span style="color:var(--green); font-weight:600;">54 qualified enquiries</span> from a
+            <span style="color:#60a5fa; font-weight:600;">£313.94 spend</span> — delivering
+            <span style="color:var(--gold2); font-weight:600;">£22,800</span> in pipeline opportunity.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="f-brand">
+      <div class="f-kamon"><div class="f-kamon-star"></div></div>
+      <div>
+        <div class="f-name">Satori JuJitsu</div>
+        <div class="f-tagline">Lanelli · Campaign Performance Report</div>
+      </div>
+    </div>
+    <div class="f-right">FACEBOOK ADS · GOHIGHLEVEL CRM<br>FEB 25 – MAR 26, 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>

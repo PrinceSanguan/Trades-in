@@ -1,0 +1,296 @@
+:global(html),
+:global(body),
+:global(#app) {
+    height: 100%;
+}
+
+.pageWrapper {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: calc(100dvh / 0.75);
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    padding-block: 4rem;
+    background: linear-gradient(180deg, #ececec 0%, #e3e3e3 52%, #ededed 100%);
+}
+
+.content {
+    text-align: center;
+    max-width: 42rem;
+    margin-inline: auto;
+}
+
+.checkmark {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto 2rem;
+    color: #000;
+    animation: checkmarkScale 0.5s ease-out;
+}
+
+@keyframes checkmarkScale {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.title {
+    margin: 0 0 1rem;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 950;
+    line-height: 1.1;
+    color: var(--foreground);
+}
+
+.subtitle {
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.text {
+    margin: 0 0 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+    max-width: 36rem;
+    margin-inline: auto;
+}
+
+.redirecting {
+    margin: 1.5rem 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    font-style: italic;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.4rem;
+    border-radius: 999px;
+    background: linear-gradient(145deg, rgba(242, 242, 242, 0.98), rgba(230, 230, 230, 0.94));
+    color: rgba(46, 46, 46, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow:
+        -6px -6px 12px rgba(255, 255, 255, 0.84),
+        7px 8px 14px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 150ms ease, transform 150ms ease;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.26);
+    line-height: 1;
+}
+
+.button:hover {
+    transform: scale(1.01);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.infoBox {
+    max-width: 36rem;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(145deg, rgba(244, 244, 244, 0.98), rgba(228, 228, 228, 0.96));
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: 1.25rem;
+    box-shadow:
+        -8px -8px 16px rgba(255, 255, 255, 0.86),
+        10px 12px 22px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.infoTitle {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--foreground);
+}
+
+.infoList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.infoList li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--muted-foreground);
+}
+
+.infoList li:last-child {
+    margin-bottom: 0;
+}
+
+.infoList li::before {
+    content: '•';
+    position: absolute;
+    left: 0.5rem;
+    color: var(--foreground);
+    font-weight: 700;
+}
+
+/* Verification Form Styles */
+.verificationForm {
+    max-width: 24rem;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    background: linear-gradient(145deg, rgba(244, 244, 244, 0.98), rgba(228, 228, 228, 0.96));
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: 1.25rem;
+    box-shadow:
+        -8px -8px 16px rgba(255, 255, 255, 0.86),
+        10px 12px 22px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--foreground);
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.46);
+    border-radius: 0.95rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.5em;
+    text-align: center;
+    background: linear-gradient(145deg, rgba(246, 246, 246, 0.98), rgba(236, 236, 236, 0.94));
+    color: var(--foreground);
+    box-shadow:
+        inset 2px 2px 5px rgba(0, 0, 0, 0.04),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.78),
+        -5px -5px 10px rgba(255, 255, 255, 0.82),
+        6px 8px 14px rgba(0, 0, 0, 0.07);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.input:focus {
+    outline: 0.16rem solid rgba(255, 105, 0, 0.18);
+    outline-offset: 0.08rem;
+    border-color: rgba(255, 255, 255, 0.58);
+}
+
+.input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.input[aria-invalid="true"] {
+    border-color: hsl(0, 70%, 50%);
+}
+
+.timer {
+    margin: 0.5rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+}
+
+.note {
+    margin: 0.5rem 0 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--muted-foreground);
+}
+
+.error {
+    margin: 0 0 1rem;
+    padding: 0.75rem 1rem;
+    background: hsl(0, 70%, 97%);
+    border: 1px solid hsl(0, 70%, 85%);
+    border-radius: 0.95rem;
+    color: hsl(0, 70%, 35%);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.success {
+    margin: 0 0 1rem;
+    padding: 0.75rem 1rem;
+    background: hsl(142, 70%, 97%);
+    border: 1px solid hsl(142, 70%, 85%);
+    border-radius: 0.95rem;
+    color: hsl(142, 70%, 30%);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.verificationForm .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.verificationForm .actions button {
+    width: 100%;
+}
+
+.linkButton {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    background: linear-gradient(145deg, rgba(244, 244, 244, 0.98), rgba(232, 232, 232, 0.94));
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: 999px;
+    box-shadow:
+        -5px -5px 10px rgba(255, 255, 255, 0.82),
+        6px 8px 14px rgba(0, 0, 0, 0.07);
+    cursor: pointer;
+    transition: color 150ms ease, transform 150ms ease;
+}
+
+.linkButton:hover {
+    color: var(--foreground);
+    transform: scale(1.01);
+}

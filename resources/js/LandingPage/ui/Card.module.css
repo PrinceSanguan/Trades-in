@@ -1,0 +1,26 @@
+.card {
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    border-radius: calc(var(--radius) + 0.875rem);
+    background: #ffffff;
+    box-shadow:
+        -4px -4px 8px rgba(255, 255, 255, 0.5),
+        5px 6px 11px rgba(0, 0, 0, 0.05);
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+}
+
+.card:hover {
+    border-color: rgba(17, 24, 39, 0.18);
+    box-shadow:
+        -5px -5px 10px rgba(255, 255, 255, 0.5),
+        6px 7px 12px rgba(0, 0, 0, 0.05);
+}
+
+.body {
+    padding: 1.25rem;
+}
+
+@media (min-width: 1025px) {
+    .body {
+        padding: 1.5rem;
+    }
+}

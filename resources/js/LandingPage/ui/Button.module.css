@@ -1,0 +1,169 @@
+.button {
+    all: unset;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: relative;
+    display: inline-block;
+    border-radius: 999px;
+    background: var(--landing-button-shell, linear-gradient(145deg, rgba(255, 146, 47, 0.98), rgba(255, 105, 0, 0.96)));
+    box-shadow:
+        -6px -6px 12px rgba(255, 255, 255, 0.84),
+        7px 8px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 250ms ease, box-shadow 250ms ease;
+    white-space: nowrap;
+    color: var(--landing-button-text, rgba(255, 247, 240, 0.98));
+    text-shadow: var(--landing-button-text-shadow, 0 1px 0 rgba(120, 47, 0, 0.28));
+}
+
+.button::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    width: calc(100% + 0.24em);
+    height: calc(100% + 0.24em);
+    top: -0.12em;
+    left: -0.12em;
+    border-radius: inherit;
+    background: linear-gradient(-135deg, rgba(5, 5, 5, 0.16), transparent 22%, transparent 100%);
+    filter: blur(0.0125em);
+    opacity: 0.14;
+    mix-blend-mode: multiply;
+}
+
+.button:focus-visible {
+    outline: 0.2rem solid rgba(255, 122, 26, 0.45);
+    outline-offset: 0.2rem;
+}
+
+.buttonOuter {
+    position: relative;
+    z-index: 1;
+    display: block;
+    border-radius: inherit;
+    padding: 0.14rem;
+    transition: box-shadow 300ms ease;
+    will-change: box-shadow;
+}
+
+.button:hover .buttonOuter {
+    box-shadow: none;
+}
+
+.buttonInner {
+    position: relative;
+    z-index: 1;
+    display: block;
+    border-radius: inherit;
+    padding: 0.88em 1.35em;
+    background-image: var(--landing-button-face, linear-gradient(135deg, rgba(255, 156, 69, 1), rgba(255, 105, 0, 1) 56%, rgba(255, 136, 2, 1)));
+    transition:
+        box-shadow 300ms ease,
+        clip-path 250ms ease,
+        background-image 250ms ease,
+        transform 250ms ease;
+    will-change: box-shadow, clip-path, background-image, transform;
+    overflow: clip;
+    clip-path: inset(0 0 0 0 round 100em);
+    box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.04),
+        -0.035em -0.035em 0.04em 0 inset rgba(5, 5, 5, 0.1),
+        0 0 0 0 inset rgba(5, 5, 5, 0.04),
+        0 0 0.05em 0.18em inset rgba(255, 214, 187, 0.24),
+        0.018em 0.035em 0.07em 0 inset rgba(255, 232, 214, 0.56),
+        0.08em 0.08em 0.08em inset rgba(255, 226, 201, 0.12),
+        -0.05em -0.14em 0.16em 0.07em inset rgba(118, 42, 0, 0.2);
+}
+
+.button:hover .buttonInner {
+    clip-path: inset(clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 100em);
+    box-shadow:
+        0.08em 0.12em 0.045em 0 inset rgba(110, 36, 0, 0.34),
+        -0.022em -0.026em 0.04em 0.02em inset rgba(128, 42, 0, 0.22),
+        0.2em 0.2em 0.14em 0 inset rgba(120, 40, 0, 0.16),
+        0 0 0.08em 0.42em inset rgba(255, 224, 201, 0.14),
+        0 0 0 0 inset rgba(255, 245, 236, 0.92),
+        0.08em 0.08em 0.08em inset rgba(255, 228, 208, 0.2),
+        -0.05em -0.08em 0.14em 0.08em inset rgba(112, 38, 0, 0.18);
+}
+
+.button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow:
+        -8px -8px 16px rgba(255, 196, 150, 0.42),
+        12px 16px 24px rgba(109, 38, 0, 0.22);
+}
+
+.buttonLabel {
+    position: relative;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    line-height: 1;
+    font-family: inherit;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+    color: var(--landing-button-text, rgba(255, 247, 240, 0.98));
+    background-image: linear-gradient(135deg, rgba(255, 252, 248, 1), rgba(255, 233, 214, 1));
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: transform 250ms ease;
+    will-change: transform;
+    user-select: none;
+}
+
+.button:hover .buttonLabel {
+    transform: scale(0.985);
+}
+
+.button:active .buttonInner {
+    transform: scale(0.975);
+}
+
+.buttonLabel svg {
+    color: var(--landing-button-text, rgba(255, 247, 240, 0.98));
+    flex-shrink: 0;
+}
+
+.buttonLabel svg * {
+    fill: currentColor;
+    stroke: currentColor;
+}
+
+.buttonLabel svg [fill='none'] {
+    fill: none;
+}
+
+.button:hover .buttonLabel svg {
+    filter: drop-shadow(0 0 0.1em rgba(255, 247, 240, 0.15));
+}
+
+.primary {
+}
+
+.secondary {
+}
+
+.ghost {
+}
+
+.sm {
+    font-size: 0.875rem;
+}
+
+.sm .buttonInner {
+    padding: 0.8em 1.15em;
+}
+
+@media (max-width: 640px) {
+    .button {
+        width: 100%;
+    }
+
+    .buttonOuter,
+    .buttonInner,
+    .buttonLabel {
+        width: 100%;
+    }
+}

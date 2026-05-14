@@ -1,0 +1,65 @@
+.footer {
+    padding-block: 2.25rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 248, 248, 0.86));
+    backdrop-filter: blur(16px) saturate(150%);
+}
+
+.row {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 900;
+    color: #000;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+
+.logoImageWrap {
+    position: relative;
+    display: inline-block;
+    height: 3.2rem;
+}
+
+.logoImage,
+.logoImageFiltered {
+    display: block;
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.logoImageFiltered {
+    position: absolute;
+    inset: 0;
+    filter: brightness(0) saturate(100%);
+    clip-path: inset(0 0 0 24%);
+    pointer-events: none;
+}
+
+.muted {
+    color: rgba(0, 0, 0, 0.72);
+    line-height: 1.6;
+    margin: 0.25rem 0 0;
+}
+
+/* Button now uses standardized Button component */
+
+@media (max-width: 640px) {
+    .row {
+        grid-template-columns: 1fr;
+        align-items: start;
+    }
+}
+
+@media (min-width: 1025px) {
+    .row {
+        grid-template-columns: 1fr auto;
+        align-items: start;
+    }
+}

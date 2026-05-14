@@ -1,0 +1,33 @@
+.container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.page {
+    max-width: 92rem;
+}
+
+.wide {
+    max-width: 72rem;
+}
+
+.medium {
+    max-width: 56rem;
+}
+
+.narrow {
+    max-width: 42rem;
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .container {
+        padding-inline: 1.5rem;
+    }
+}
+
+@media (min-width: 1025px) {
+    .container {
+        padding-inline: 2rem;
+    }
+}

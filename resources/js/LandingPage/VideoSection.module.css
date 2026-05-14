@@ -1,0 +1,213 @@
+.section {
+    background: transparent;
+    padding: 4rem 0;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.85rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    color: #c45a00;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.title {
+    margin-top: 1rem;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+}
+
+.subtitle {
+    margin-top: 1rem;
+    max-width: 52rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: #4b5563;
+}
+
+.videoBlock {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.videoLabel {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    background: #ffffff;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    box-shadow: 0 12px 24px -12px rgb(15 23 42 / 0.15);
+    margin: 0 auto;
+}
+
+.videoInner {
+    position: absolute;
+    inset: 0;
+}
+
+.videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.videoCaption {
+    max-width: 46rem;
+    margin: 1rem auto 0;
+    text-align: center;
+    color: #4b5563;
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.stepsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+}
+
+.stepCard {
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: #ffffff;
+    border: 1px solid rgba(17, 24, 39, 0.15);
+    box-shadow: 0 9px 20px -14px rgb(15 23 42 / 0.15);
+}
+
+.stepNumber {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #c45a00;
+}
+
+.stepTitle {
+    margin: 0.6rem 0 0;
+    font-size: 1.18rem;
+    line-height: 1.35;
+    color: #111827;
+}
+
+.stepBody {
+    margin: 0.75rem 0 0;
+    font-size: 0.98rem;
+    line-height: 1.72;
+    color: #4b5563;
+}
+
+.ctaButtons {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.ctaPhone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    background: #111827;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaPhone:hover { background: #374151; }
+
+.ctaWhatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    background: #111827;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaWhatsapp:hover { background: #374151; }
+
+.ctaQuote {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    border: 2px solid #111827;
+    color: #374151;
+    background: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ctaQuote:hover { background: #ffffff; }
+
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 3.5rem 0;
+    }
+
+    .stepsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .ctaButtons {
+        margin-top: 2.5rem;
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .stepCard {
+        padding: 1.25rem;
+    }
+}
