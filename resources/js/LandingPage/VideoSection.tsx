@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './VideoSection.module.css';
 
 type VideoSectionProps = {
@@ -10,24 +10,20 @@ export default function VideoSection({ phone }: VideoSectionProps) {
     const processVideoSrc = '/videos/Choros%20Marketing%20landing%20page%20(1)%20(1)%20(1).webm';
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
-    const ensureMuted = () => {
-        const video = videoRef.current;
-        if (!video) return;
-        video.muted = true;
-        video.defaultMuted = true;
-    };
+    const [playing, setPlaying] = useState(false);
 
     useEffect(() => {
-        ensureMuted();
-
-        // When navigating back/forward, browsers may restore media element state.
-        const handlePageShow = () => ensureMuted();
-        window.addEventListener('pageshow', handlePageShow);
-
-        return () => {
-            window.removeEventListener('pageshow', handlePageShow);
-        };
+        const video = videoRef.current;
+        if (!video) return;
+        video.muted = false;
     }, []);
+
+    const handlePlay = () => {
+        const video = videoRef.current;
+        if (!video) return;
+        video.play();
+        setPlaying(true);
+    };
 
     const steps = [
         {
@@ -70,15 +66,24 @@ export default function VideoSection({ phone }: VideoSectionProps) {
                             <video
                                 ref={videoRef}
                                 className={styles.videoElement}
-                                autoPlay
-                                muted
                                 controls
                                 playsInline
                                 preload="metadata"
+                                onPlay={() => setPlaying(true)}
+                                onPause={() => setPlaying(false)}
                             >
                                 <source src={processVideoSrc} type="video/webm" />
                                 Your browser does not support the video tag.
                             </video>
+                            {!playing && (
+                                <button className={styles.playOverlay} onClick={handlePlay} aria-label="Play video">
+                                    <span className={styles.playBtn}>
+                                        <svg viewBox="0 0 24 24" fill="currentColor" className={styles.playIcon}>
+                                            <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                    </span>
+                                </button>
+                            )}
                         </div>
                     </div>
                     <p className={styles.videoCaption}>See the exact process we use to generate exclusive leads, secure booked appointments, and deliver 10X ROI for trade businesses across the UK.</p>

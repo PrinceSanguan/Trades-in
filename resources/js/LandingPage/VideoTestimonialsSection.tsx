@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './VideoTestimonialsSection.module.css';
 
 const videos = [
@@ -106,8 +106,22 @@ export default function VideoTestimonialsSection({ phone }: VideoTestimonialsSec
         };
     }, []);
 
+    const [playingSet, setPlayingSet] = useState<Set<number>>(new Set());
+
+    const markPlaying = (i: number) =>
+        setPlayingSet((prev) => new Set(prev).add(i));
+
+    const markPaused = (i: number) =>
+        setPlayingSet((prev) => { const s = new Set(prev); s.delete(i); return s; });
+
+    const handleManualPlay = (i: number) => {
+        const video = videoRefs.current[i];
+        if (!video) return;
+        video.muted = false;
+        video.play().catch(() => {});
+    };
+
     const results = [
-        { title: '10X ROI', description: 'Delivered consistently' },
         { title: '100% Exclusive Leads', description: 'Never shared with competitors' },
         { title: 'Full Inbox Guaranteed', description: 'Booked by our call team' },
         { title: 'UK-Wide', description: 'Covering all of the UK' },
@@ -146,7 +160,22 @@ export default function VideoTestimonialsSection({ phone }: VideoTestimonialsSec
                                     playsInline
                                     preload="auto"
                                     controls
+                                    onPlay={() => markPlaying(i)}
+                                    onPause={() => markPaused(i)}
                                 />
+                                {!playingSet.has(i) && (
+                                    <button
+                                        className={styles.playOverlay}
+                                        onClick={() => handleManualPlay(i)}
+                                        aria-label={`Play ${video.name} testimonial`}
+                                    >
+                                        <span className={styles.playBtn}>
+                                            <svg viewBox="0 0 24 24" fill="currentColor" className={styles.playIcon}>
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </span>
+                                    </button>
+                                )}
                             </div>
                             <div className={styles.cardBody}>
                                 <p className={styles.author}>{video.name}</p>

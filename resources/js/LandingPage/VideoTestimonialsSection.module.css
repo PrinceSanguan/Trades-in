@@ -139,6 +139,45 @@
     display: block;
 }
 
+.playOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease;
+}
+
+.playOverlay:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.playBtn {
+    width: 4rem;
+    height: 4rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.playOverlay:hover .playBtn {
+    transform: scale(1.08);
+}
+
+.playIcon {
+    width: 1.6rem;
+    height: 1.6rem;
+    color: #111827;
+    margin-left: 3px;
+}
+
 @media (max-width: 1024px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
