@@ -34,10 +34,11 @@ class SecurityHeaders
         if (app()->isProduction()) {
             $response->headers->set('Content-Security-Policy', implode('; ', [
                 "default-src 'self'",
-                "script-src 'self' 'unsafe-inline' https://link.msgsndr.com https://www.google.com https://www.gstatic.com",
+                "script-src 'self' 'unsafe-inline' https://link.msgsndr.com https://www.google.com https://www.gstatic.com https://www.googletagmanager.com",
                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
                 "font-src 'self' https://fonts.gstatic.com",
                 "img-src 'self' data: https:",
+                "media-src 'self' https://choros.io",
                 "frame-src https://api.leadconnectorhq.com https://www.google.com",
                 "connect-src 'self' https://api.leadconnectorhq.com https://link.msgsndr.com",
                 "object-src 'none'",
