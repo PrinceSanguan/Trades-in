@@ -15,12 +15,27 @@ export default function VideoSection({ phone }: VideoSectionProps) {
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
-        video.muted = false;
+
+        // Autoplay muted when 30% of the video is in view; pause when out of view
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    video.muted = true;
+                    video.play().catch(() => {});
+                } else {
+                    video.pause();
+                }
+            },
+            { threshold: 0.3 },
+        );
+        observer.observe(video);
+        return () => observer.disconnect();
     }, []);
 
     const handlePlay = () => {
         const video = videoRef.current;
         if (!video) return;
+        video.muted = false;
         video.play();
         setPlaying(true);
     };
