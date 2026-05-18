@@ -79,6 +79,13 @@ export default function VideoTestimonialsSection({ phone }: VideoTestimonialsSec
             videoEl.muted = true;
             videoEl.defaultMuted = true;
 
+            // Seek to 0.001s on metadata load so the browser renders
+            // the first real frame instead of a black screen
+            const showFirstFrame = () => {
+                videoEl.currentTime = 0.001;
+            };
+            videoEl.addEventListener('loadedmetadata', showFirstFrame, { once: true });
+
             const observer = new IntersectionObserver(
                 ([entry]) => {
                     if (entry.isIntersecting) {
@@ -87,7 +94,7 @@ export default function VideoTestimonialsSection({ phone }: VideoTestimonialsSec
                         videoEl.pause();
                     }
                 },
-                { threshold: 0.3 }
+                { threshold: 0.25 }
             );
 
             observer.observe(videoEl);
@@ -137,7 +144,7 @@ export default function VideoTestimonialsSection({ phone }: VideoTestimonialsSec
                                     muted
                                     loop
                                     playsInline
-                                    preload="metadata"
+                                    preload="auto"
                                     controls
                                 />
                             </div>
