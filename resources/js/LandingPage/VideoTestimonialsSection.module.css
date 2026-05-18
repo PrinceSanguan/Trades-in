@@ -129,6 +129,8 @@
     aspect-ratio: 9 / 16;
     background: #111827;
     overflow: hidden;
+    position: relative;
+    cursor: pointer;
 }
 
 .video {
@@ -136,6 +138,20 @@
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.playOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    transition: background 0.2s ease;
+}
+
+.videoPlaceholder:hover .playOverlay {
+    background: rgba(0, 0, 0, 0.45);
 }
 
 @media (max-width: 1024px) {
@@ -151,28 +167,25 @@
 }
 
 .playBtn {
-    width: 5rem;
-    height: 5rem;
-    background: #111827;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 9999px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    border: none;
-    transition: background 0.2s;
-    flex-direction: column;
-    gap: 0.5rem;
+    transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.playBtn:hover {
-    background: #374151;
+.videoPlaceholder:hover .playBtn {
+    transform: scale(1.08);
+    background: #ffffff;
 }
 
 .playIcon {
-    width: 2rem;
-    height: 2rem;
-    color: white;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: #111827;
     margin-left: 3px;
 }
 

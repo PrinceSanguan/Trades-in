@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './VideoTestimonialsSection.module.css';
 
 const videos = [
@@ -69,23 +69,38 @@ type VideoTestimonialsSectionProps = { phone?: string };
 export default function VideoTestimonialsSection({ phone }: VideoTestimonialsSectionProps) {
     const wa = phone ? `https://wa.me/${phone.replace(/\D/g, '').replace(/^0/, '44')}` : '#contact';
     const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
+    const [playingIndex, setPlayingIndex] = useState<number | null>(null);
 
     useEffect(() => {
-        const enforceMutedVideos = () => {
-            for (const videoEl of videoRefs.current) {
-                if (!videoEl) continue;
-                videoEl.defaultMuted = true;
-                videoEl.muted = true;
-            }
-        };
-
-        enforceMutedVideos();
-        window.addEventListener('pageshow', enforceMutedVideos);
-
-        return () => {
-            window.removeEventListener('pageshow', enforceMutedVideos);
-        };
+        for (const videoEl of videoRefs.current) {
+            if (!videoEl) continue;
+            videoEl.defaultMuted = true;
+            videoEl.muted = true;
+        }
     }, []);
+
+    const handlePlay = (index: number) => {
+        // Pause the previously playing video
+        if (playingIndex !== null && playingIndex !== index) {
+            const prev = videoRefs.current[playingIndex];
+            if (prev) {
+                prev.pause();
+                prev.currentTime = 0;
+            }
+        }
+
+        const current = videoRefs.current[index];
+        if (!current) return;
+
+        if (playingIndex === index) {
+            current.pause();
+            setPlayingIndex(null);
+        } else {
+            current.muted = false;
+            current.play();
+            setPlayingIndex(index);
+        }
+    };
 
     const results = [
         { title: '10X ROI', description: 'Delivered consistently' },
@@ -115,20 +130,31 @@ export default function VideoTestimonialsSection({ phone }: VideoTestimonialsSec
                 <div className={styles.grid}>
                     {videos.map((video, i) => (
                         <div key={i} className={styles.card}>
-                            <div className={styles.videoPlaceholder}>
+                            <div
+                                className={styles.videoPlaceholder}
+                                onClick={() => handlePlay(i)}
+                            >
                                 <video
                                     ref={(element) => {
                                         videoRefs.current[i] = element;
                                     }}
                                     className={styles.video}
                                     src={video.src}
-                                    autoPlay
-                                    controls
                                     muted
-                                    defaultMuted
                                     loop
                                     playsInline
+                                    preload="metadata"
+                                    onEnded={() => setPlayingIndex(null)}
                                 />
+                                {playingIndex !== i && (
+                                    <div className={styles.playOverlay}>
+                                        <div className={styles.playBtn}>
+                                            <svg viewBox="0 0 24 24" fill="currentColor" className={styles.playIcon}>
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <div className={styles.cardBody}>
                                 <p className={styles.author}>{video.name}</p>
